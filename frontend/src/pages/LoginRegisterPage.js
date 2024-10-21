@@ -50,7 +50,7 @@ function LoginRegisterPage() {
       {/* Formulario de registro */}
       {isRegister ? (
         <form onSubmit={handleRegister} className="bg-white p-6 rounded-lg shadow-md w-full max-w-md space-y-4">
-          <h2 className="text-2xl font-bold text-[#143548] mb-4 text-center">Registrarte</h2>
+          <h2 className="text-2xl font-bold text-[#143548] mb-4 text-center">INGRESA TUS DATOS</h2>
           <input
             type="email"
             name="email"
@@ -117,7 +117,7 @@ function LoginRegisterPage() {
       ) : (
         // Formulario de inicio de sesión
         <form onSubmit={handleLogin} className="bg-white p-6 rounded-lg shadow-md w-full max-w-md space-y-4">
-          <h2 className="text-2xl font-bold text-[#143548] mb-4 text-center">Iniciar Sesión</h2>
+          <h2 className="text-2xl font-bold text-[#143548] mb-4 text-center">BIENVENIDO DE VUELTA</h2>
           <input
             type="email"
             name="email"

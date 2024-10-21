@@ -6,7 +6,7 @@ import ProfilePage from './pages/ProfilePage';
 import SearchPage from './pages/SearchPage';
 import OfferPage from './pages/OfferPage';
 import Navbar from "./components/Navbar";
-import ChatPage from './pages/ChatPage';
+import ChatsPage from './pages/ChatsPage';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/offer" element={<OfferPage />} />
-          <Route path="/chat" element={<ChatPage />} />
+          <Route path="/chats" element={<ChatsPage />} />
       </Routes>
     </Router>
   );
