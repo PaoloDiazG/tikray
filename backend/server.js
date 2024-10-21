@@ -6,6 +6,7 @@ const passport = require('passport');
 require('dotenv').config(); // Cargar variables de entorno
 require('./passportConfig'); // Configuración de Google OAuth
 const objectRoutes = require('./routes/objectRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 // Inicializar la aplicación Express
 const app = express();
@@ -29,7 +30,7 @@ app.use(express.json());
 
 
 app.use('/api/objects', objectRoutes);
-
+app.use('/api/users', userRoutes);
 // Configurar middlewares
 app.use(cors());
 app.use(express.json());
