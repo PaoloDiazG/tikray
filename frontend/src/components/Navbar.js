@@ -3,15 +3,32 @@ import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
-    <nav>
-      <ul>
-        <li><Link to="/">Inicio</Link></li>
-        <li><Link to="/login">Iniciar Sesión</Link></li>
-        <li><Link to="/profile">Perfil</Link></li>
-        <li><Link to="/search">Buscar</Link></li>
-        <li><Link to="/offer">Ofertar</Link></li>
-          <li><Link to="/chat">Mis Chats</Link></li>
-      </ul>
+    <nav className="bg-[#143548] text-white px-4 py-3">
+      <div className="container mx-auto flex justify-between items-center">
+        {/* Logo de la aplicación */}
+        <Link to="/" className="text-2xl font-bold text-[#f29102]">
+          Tikray
+        </Link>
+
+        {/* Enlaces de navegación */}
+        <div className="space-x-4">
+          <Link to="/" className="hover:text-[#f29102]">
+            Inicio
+          </Link>
+          <Link to="/search" className="hover:text-[#f29102]">
+            Buscar
+          </Link>
+          <Link to="/offer" className="hover:text-[#f29102]">
+            Ofertar
+          </Link>
+          <Link to="/profile" className="hover:text-[#f29102]">
+            Perfil
+          </Link>
+          <Link to="/login" className="hover:text-[#f29102]">
+            Iniciar Sesión
+          </Link>
+        </div>
+      </div>
     </nav>
   );
 }
