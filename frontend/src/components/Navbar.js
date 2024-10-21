@@ -10,6 +10,7 @@ function Navbar() {
         <li><Link to="/profile">Perfil</Link></li>
         <li><Link to="/search">Buscar</Link></li>
         <li><Link to="/offer">Ofertar</Link></li>
+          <li><Link to="/chat">Mis Chats</Link></li>
       </ul>
     </nav>
   );
