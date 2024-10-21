@@ -22,7 +22,7 @@ function Navbar() {
             Ofertar
           </Link>
           <Link to="/profile" className="hover:text-[#f29102]">
-            Perfil
+            Mi Perfil
           </Link>
           <Link to="/login" className="hover:text-[#f29102]">
             Iniciar Sesión
