@@ -24,8 +24,11 @@ function Navbar() {
           <Link to="/profile" className="hover:text-[#f29102]">
             Mi Perfil
           </Link>
-          <Link to="/login" className="hover:text-[#f29102]">
-            Iniciar Sesión
+          <Link
+            to="/login"
+            className="px-4 py-2 bg-[#f29102] text-white rounded-md font-semibold hover:bg-[#d57c01] transition"
+          >
+            INGRESA
           </Link>
         </div>
       </div>
