@@ -42,7 +42,7 @@ function SearchPage() {
 
   return (
     <div className="bg-[#f5f5f5] min-h-screen p-8">
-      <h1 className="text-3xl font-bold text-[#143548] mb-6 text-center">Buscar Objetos</h1>
+      <h1 className="text-3xl font-bold text-[#143548] mb-6 text-center">¿Qué estas buscando hoy? 🤔</h1>
 
       {/* Barra de búsqueda y filtros */}
       <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-6">
