@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from '../axiosConfig'; // Importa Axios desde la carpeta src
 
 function OfferPage() {
   const navigate = useNavigate();
@@ -9,12 +9,13 @@ function OfferPage() {
   const [name, setName] = useState('');
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
+  const [city, setCity] = useState('');
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState('');
   const [isUploading, setIsUploading] = useState(false);
 
   // Función para manejar la carga de la imagen y la subida a Cloudinary
-  const handleImageUpload = async (e) => {
+  const handleImageUpload = (e) => {
     const file = e.target.files[0];
     setImage(file);
     setImagePreview(URL.createObjectURL(file));
@@ -55,17 +56,28 @@ function OfferPage() {
           category,
           description,
           imageUrl: data.secure_url,
+          city,
         };
 
-        console.log('Nuevo Objeto:', newObject);
-        alert('¡Objeto agregado con éxito!');
+        // Enviar el nuevo objeto al backend
+        try {
+          const backendResponse = await axios.post('/objects', newObject);
+          alert(backendResponse.data.message); // Mostrar el mensaje del backend
 
-        // Limpiar el formulario
-        setName('');
-        setCategory('');
-        setDescription('');
-        setImage(null);
-        setImagePreview('');
+          // Limpiar el formulario
+          setName('');
+          setCategory('');
+          setDescription('');
+          setCity('');
+          setImage(null);
+          setImagePreview('');
+
+          // Redirigir al inicio
+          navigate('/');
+        } catch (backendError) {
+          console.error('Error al enviar el objeto al backend:', backendError.response?.data || backendError.message);
+          alert('Error al guardar el objeto en la base de datos.');
+        }
       } else {
         alert('Error al subir la imagen a Cloudinary.');
       }
@@ -145,6 +157,22 @@ function OfferPage() {
           />
         </div>
 
+        {/* Campo de ciudad */}
+        <div>
+          <label className="block text-sm text-[#143548]">Ciudad:</label>
+          <select
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#f29102]"
+            required
+          >
+            <option value="">Selecciona una ciudad</option>
+            <option value="Lima">Lima</option>
+            <option value="Arequipa">Arequipa</option>
+            <option value="Tacna">Tacna</option>
+          </select>
+        </div>
+
         {/* Botones de acción */}
         <div className="flex justify-between mt-4">
           <button
@@ -173,3 +201,4 @@ function OfferPage() {
 }
 
 export default OfferPage;
+

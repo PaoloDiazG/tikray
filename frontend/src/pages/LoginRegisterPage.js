@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from '../axiosConfig'; // Importa Axios desde la carpeta src
 
 function LoginRegisterPage() {
   const [isRegister, setIsRegister] = useState(true); // Alterna entre registro e inicio de sesión
@@ -9,6 +10,7 @@ function LoginRegisterPage() {
     lastName: '',
     gender: '',
     birthDate: '',
+    identityDocument: '',
   });
 
   // Función para manejar cambios en los campos
@@ -18,15 +20,37 @@ function LoginRegisterPage() {
   };
 
   // Función para manejar el registro
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-    alert('¡Registro exitoso!');
-  };
+    console.log('Datos a enviar:', formData);
+
+    // Validar el documento de identidad
+    if (!/^\d{8}$/.test(formData.identityDocument)) {
+      alert('El documento de identidad debe tener exactamente 8 dígitos.');
+      return;
+    }
+
+    try {
+      const response = await axios.post('/users/register', formData);
+      console.log('Respuesta del backend:', response.data); // Log para ver la respuesta del backend
+    alert(response.data.message);
+  } catch (error) {
+    console.error('Error al registrar el usuario:', error.response?.data || error.message);
+    alert('Error al registrar el usuario.');
+  }
+};
 
   // Función para manejar el inicio de sesión
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    alert('¡Inicio de sesión exitoso!');
+
+    try {
+      const response = await axios.post('/api/users/login', formData);
+      alert(response.data.message);
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error.response?.data || error.message);
+      alert('Error al iniciar sesión.');
+    }
   };
 
   return (
@@ -50,7 +74,16 @@ function LoginRegisterPage() {
       {/* Formulario de registro */}
       {isRegister ? (
         <form onSubmit={handleRegister} className="bg-white p-6 rounded-lg shadow-md w-full max-w-md space-y-4">
-          <h2 className="text-2xl font-bold text-[#143548] mb-4 text-center">INGRESA TUS DATOS</h2>
+          <h2 className="text-2xl font-bold text-[#143548] mb-4 text-center">Registrarte</h2>
+          <input
+            type="text"
+            name="identityDocument"
+            value={formData.identityDocument}
+            onChange={handleChange}
+            placeholder="Documento de identidad (DNI o CE)"
+            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#f29102]"
+            required
+          />
           <input
             type="email"
             name="email"
@@ -117,7 +150,7 @@ function LoginRegisterPage() {
       ) : (
         // Formulario de inicio de sesión
         <form onSubmit={handleLogin} className="bg-white p-6 rounded-lg shadow-md w-full max-w-md space-y-4">
-          <h2 className="text-2xl font-bold text-[#143548] mb-4 text-center">BIENVENIDO DE VUELTA</h2>
+          <h2 className="text-2xl font-bold text-[#143548] mb-4 text-center">Iniciar Sesión</h2>
           <input
             type="email"
             name="email"
@@ -149,3 +182,4 @@ function LoginRegisterPage() {
 }
 
 export default LoginRegisterPage;
+

@@ -55,7 +55,7 @@ function ChatsPage() {
             </div>
             <div className="flex justify-end">
               <div className="bg-[#f29102] text-white p-3 rounded-lg max-w-xs">
-                <p className="text-sm">Todo bien, gracias. ¿Y tú?</p>
+                <p className="text-sm"> To do bien, gracias. ¿Y tú?</p>
               </div>
             </div>
           </div>

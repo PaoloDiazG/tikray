@@ -1,17 +1,28 @@
-const mongoose = require('mongoose');
+const { Sequelize } = require('sequelize');
+require('dotenv').config(); // Para usar las variables de entorno
 
-// Función para conectar a la base de datos de MongoDB
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log('Conexión a MongoDB exitosa');
-  } catch (error) {
-    console.error('Error al conectar a MongoDB:', error.message);
-    process.exit(1); // Terminar el proceso en caso de error
+// Crear una nueva instancia de Sequelize con los datos de conexión
+const sequelize = new Sequelize(
+  process.env.DB_NAME, // Nombre de la base de datos
+  process.env.DB_USER, // Usuario de la base de datos
+  process.env.DB_PASSWORD, // Contraseña de la base de datos
+  {
+    host: process.env.DB_HOST, // Host de la base de datos
+    port: process.env.DB_PORT, // Puerto de la base de datos (5432 por defecto)
+    dialect: 'postgres', // Especificar el dialecto de la base de datos (PostgreSQL)
+    logging: false, // Desactiva el registro de consultas en la consola
   }
-};
+);
 
-module.exports = connectDB;
+// Verificar la conexión a la base de datos
+async function connectDB() {
+  try {
+    await sequelize.authenticate();
+    console.log('Conexión a PostgreSQL establecida exitosamente.');
+  } catch (error) {
+    console.error('Error al conectar con la base de datos:', error);
+    process.exit(1); // Termina la aplicación si no se conecta a la base de datos
+  }
+}
+
+module.exports = { sequelize, connectDB };
